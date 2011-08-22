@@ -1,6 +1,6 @@
-module PagesHelper
-  def title
-    base_title = "Traveli"
+module ProtoHelper
+def title
+    base_title = "Product John"
     if @title.nil?
       base_title
     else

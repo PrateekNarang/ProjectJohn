@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> New Document </TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+</HEAD>
+
+<BODY onLoad='init()'>
+<canvas id="canvas" width="1000" height="1000">
+</canvas>
+</BODY>
+</HTML>
+<script>
+
+var INTERVAL = 20;
+
+function init(){
+canvas = document.getElementById('canvas');
+HEIGHT = canvas.height;
+WIDTH = canvas.width;
+ctx = canvas.getContext('2d');
+
+ canvas.onselectstart = function () { return false; }
+ canvas.onclick = drawLine;  
+ canvas.ondblclick = draw;
+ 
+
+
+
+
+
+}
+
+function draw(e){
+mx = e.pageX;
+my = e.pageY;
+ctx.fillStyle = "#444444";
+ctx.fillRect(mx,my,50,50);
+}
+
+
+var clicks = 0;
+var lastClick = [0, 0];
+
+
+function getCursorPosition(e) {
+    var x;
+    var y;
+
+    if (e.pageX != undefined && e.pageY != undefined) {
+        x = e.pageX;
+        y = e.pageY;
+    } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+
+    return [x, y];
+}
+
+function drawLine(e) {
+    context = this.getContext('2d');
+
+    x = getCursorPosition(e)[0] - this.offsetLeft;
+    y = getCursorPosition(e)[1] - this.offsetTop;
+
+    if (clicks != 1) {
+        clicks++;
+    } else {
+        context.beginPath();
+        context.moveTo(lastClick[0], lastClick[1]);
+        context.lineTo(x, y, 6);
+
+        context.strokeStyle = '#000000';
+        context.stroke();
+
+        clicks = 0;
+    }
+
+    lastClick = [x, y];
+}
+
+
+</script>

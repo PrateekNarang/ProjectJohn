@@ -1,0 +1,77 @@
+<BODY>
+<canvas id="canvas" width="1000" height="1000">
+</canvas>
+
+</BODY>
+<style>
+.node {
+    border: 1px solid black;
+	width:50px;
+	height:50px;
+
+}
+.nodeOptions {
+	border: 1px solid black;
+	width:80px;
+	height:80px;
+	position:absolute;
+	top:-15px;
+	left:-15px;
+}
+
+.addChild{
+position:absolute;
+top:30px;
+left:70px;
+}
+.addChild a{
+text-decoration:none;
+}
+</style>
+<script type="text/javascript" src="/javascripts/jquery-1.4.4.min.js"></script>
+<script>
+
+jQuery(document).ready(function(){ 
+    jQuery("body").onselectstart = function () { return false; }
+    
+	function showOptions(event)
+		{
+			myDiv = event.target;
+
+			//alert($(myDiv).children("div").css("display"));
+			if($(myDiv).children("div").css("display")=="none"){
+			$(myDiv).children("div").css("display","block");
+			}else{
+			$(myDiv).children("div").css("display","none");
+			}
+			
+			
+		}
+
+	function produceChild(event)
+	{
+		
+		jQuery("<div></div>").addClass(node).css("postion","absolute").css("top",50).css("left",50).appendTo("body");	
+
+	}
+
+	jQuery("body").dblclick(function(event){ 
+		var x = event.pageX;
+		var y = event.pageY;
+	  	jQuery("<div><div class='nodeOptions' style='display:none;'><div class='addChild'><a href='javascript:void(null);' onclick='javascript:produceChild();'>+</a></div></div></div>")
+		.addClass("node")
+		.css("position","absolute")
+		.css("top",y)
+		.css("left",x)
+		.bind("click",showOptions)
+		.appendTo("body");
+		
+		
+
+    }); 
+
+
+
+
+});
+</script>

@@ -1,6 +1,11 @@
 ProjectJohn::Application.routes.draw do
+  root :to => 'pages#home'
+  get "proto/JavaScript"
+  get "proto/Html5"
   get "pages/home"
-
+  match '/home',   :to => 'pages#home'
+  match '/html5',   :to => 'proto#Html5'
+  match '/javascript',   :to => 'proto#JavaScript'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
